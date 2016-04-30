@@ -36,7 +36,7 @@ RSpec.describe ActiveJob::Users do
     end
   end
 
-  describe 'around_perform' do
+  describe 'before_perform' do
     it 'calls extract_job_user!' do
       expect_any_instance_of(TestJob).to receive(:extract_job_user!)
       TestJob.perform_now

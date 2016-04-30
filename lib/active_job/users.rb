@@ -2,12 +2,7 @@ module ActiveJob
   module Users
     def self.included(base)
       base.send :attr_reader, :job_user
-
-      base.send :around_perform do |_job, block|
-        extract_job_user!
-
-        block.call
-      end
+      base.send :before_perform, :extract_job_user!
     end
 
     def extract_job_user!
