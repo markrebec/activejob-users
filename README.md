@@ -8,6 +8,8 @@
 
 `ActiveJob::Users` allows you to pass a `job_user` argument through to your jobs for context and makes it accessible within your `MyJob#perform` method. This can be useful when you have jobs that are triggered by users through some interface (i.e. an admin portal) and you want to preserve that `current_user`-style context within your job execution.
 
+It's used by [`audited-activejob`](https://github.com/markrebec/audited-activejob) to set the user association for audits generated in background jobs.
+
 ## Getting Started
 
 Just add the gem to your `Gemfile` and run `bundle install`:
