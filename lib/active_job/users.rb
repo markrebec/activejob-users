@@ -8,12 +8,12 @@ module ActiveJob
 
         block.call
       end
+    end
 
-      def extract_job_user!
-        options = arguments.extract_options!
-        @job_user = options.delete(:job_user)
-        arguments << options unless options.empty?
-      end
+    def extract_job_user!
+      options = arguments.extract_options!
+      @job_user = options.delete(:job_user)
+      arguments << options unless options.empty?
     end
   end
 end
