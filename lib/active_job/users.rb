@@ -6,7 +6,7 @@ module ActiveJob
 
     included do
       def serialize
-        super.merge({ 'job_user': job_user })
+        super.merge({ 'job_user' => job_user })
       end
 
       def deserialize(job_data)
