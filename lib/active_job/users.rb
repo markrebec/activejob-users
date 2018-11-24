@@ -1,14 +1,26 @@
 module ActiveJob
   module Users
-    def self.included(base)
-      base.send :attr_reader, :job_user
-      base.send :before_perform, :extract_job_user!
+    extend ActiveSupport::Concern
+
+    attr_accessor :job_user
+
+    included do
+      def serialize
+        super.merge({ 'job_user': job_user })
+      end
+
+      def deserialize(job_data)
+        self.job_user = job_data["job_user"]
+        super(job_data)
+      end
+
+      def enqueue(options = {})
+        self.job_user = options[:job_user] if options[:job_user]
+        super(options)
+      end
     end
 
-    def extract_job_user!
-      options = arguments.extract_options!
-      @job_user = options.delete(:job_user)
-      arguments << options unless options.empty?
-    end
   end
 end
+
+ActiveJob::Base.send(:include, ActiveJob::Users)

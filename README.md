@@ -35,12 +35,12 @@ MyJob.perform_later
 # writes "Executed MyJob for unknown" to the rails log
 
 # with a user
-MyJob.perform_later job_user: User.find_by(email: 'mark@markrebec.com')
+MyJob.set(job_user: User.find_by(email: 'mark@markrebec.com')).perform_later
 # writes "Executed MyJob for mark@markrebec.com" to the rails log
 
 # if you're in a controller or some other context where you already have a current_user
 # you'll probably just want to pass that through.
-MyJob.perform_later job_user: current_user
+MyJob.set(job_user: current_user).perform_later
 ```
 
 ## Contributing
