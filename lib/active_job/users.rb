@@ -6,11 +6,11 @@ module ActiveJob
 
     included do
       def serialize
-        super.merge({ 'job_user' => job_user.try(:to_global_id) })
+        super.merge({ 'job_user' => ActiveJob::Arguments.serialize_variable(job_user) })
       end
 
       def deserialize(job_data)
-        self.job_user = GlobalID::Locator.locate(job_data['job_user'])
+        self.job_user = ActiveJob::Arguments.deserialize_variable(job_data['job_user'])
         super(job_data)
       end
 

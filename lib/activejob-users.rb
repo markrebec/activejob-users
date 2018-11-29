@@ -1,2 +1,5 @@
+require 'active_job'
+require 'active_job/base'
+require 'active_job/arguments_ext'
 require 'active_job/users'
 require 'active_job/users/version'

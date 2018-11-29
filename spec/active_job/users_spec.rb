@@ -19,7 +19,7 @@ RSpec.describe ActiveJob::Users do
 
     it 'serialize the job_user' do
       subject.job_user = user
-      expect(subject.serialize["job_user"]).to eq(user)
+      expect(subject.serialize["job_user"]['email']).to eq(user[:email])
     end
 
     it 'deserialize the job_user' do
